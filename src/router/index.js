@@ -16,6 +16,7 @@ import SearchContainer from '@/components/tabber/SearchContainer'
 import ShopcarContainer from '@/components/tabber/ShopcarContainer'
 import NewList from '@/components/news/NewsList'
 import NewsInfo from '@/components/news/NewsInfo'
+import PhotoList from '@/components/photos/PhotoList'
 
 export default new Router({
   routes: [
@@ -48,6 +49,10 @@ export default new Router({
     {
       path: '/home/newsinfo/:id',
       component: NewsInfo
+    },
+    {
+      path: '/home/photolist',
+      component: PhotoList
     }
   ],
   linkActiveClass: 'mui-active'
