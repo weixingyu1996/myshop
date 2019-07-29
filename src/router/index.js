@@ -17,18 +17,14 @@ import ShopcarContainer from '@/components/tabber/ShopcarContainer'
 import NewList from '@/components/news/NewsList'
 import NewsInfo from '@/components/news/NewsInfo'
 import PhotoList from '@/components/photos/PhotoList'
+import PhotoInfo from '@/components/photos/PhotoInfo'
+import GoodsList from '@/components/goods/GoodsList'
 
 export default new Router({
   routes: [
     {
       path: '/home',
-      component: HomeContainer,
-      // children: [
-      //   {
-      //     path: '/home/newlist',
-      //     component: NewList
-      //   }
-      // ]
+      component: HomeContainer
     },
     {
       path: '/member',
@@ -53,6 +49,14 @@ export default new Router({
     {
       path: '/home/photolist',
       component: PhotoList
+    },
+    {
+      path: '/home/photoinfo/:id',
+      component: PhotoInfo
+    },
+    {
+      path: '/home/goodslist',
+      component: GoodsList
     }
   ],
   linkActiveClass: 'mui-active'
