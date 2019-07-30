@@ -19,6 +19,9 @@ import NewsInfo from '@/components/news/NewsInfo'
 import PhotoList from '@/components/photos/PhotoList'
 import PhotoInfo from '@/components/photos/PhotoInfo'
 import GoodsList from '@/components/goods/GoodsList'
+import GoodsInfo from '@/components/goods/GoodsInfo'
+import GoodsDesc from '@/components/goods/GoodsDesc'
+import GoodsComment from '@/components/goods/GoodsComment'
 
 export default new Router({
   routes: [
@@ -57,6 +60,21 @@ export default new Router({
     {
       path: '/home/goodslist',
       component: GoodsList
+    },
+    {
+      path: '/home/goodsinfo/:id',
+      name: 'goodsinfo',
+      component: GoodsInfo
+    },
+    {
+      path: '/home/goodsdesc/:id',
+      name: 'goodsdesc',
+      component: GoodsDesc
+    },
+    {
+      path: '/home/goodscomment/:id',
+      name: 'goodscomment',
+      component: GoodsComment
     }
   ],
   linkActiveClass: 'mui-active'

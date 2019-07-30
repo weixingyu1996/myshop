@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- 轮播图 -->
-    <mt-swipe :auto="4000">
-      <mt-swipe-item class="item-img" v-for="item in lunbotuList" :key="item.id">
-        <img :src="item.img" alt="item.id" />
-      </mt-swipe-item>
-    </mt-swipe>
+    <swiper :lunbotuList="lunbotuList" :isFull="true"></swiper>
 
     <!-- 六宫格 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -51,6 +47,8 @@
 
 <script>
 import { Toast } from "mint-ui";
+import swiper from '../subcomponents/Swiper'
+
 export default {
   data() {
     return {
@@ -73,32 +71,14 @@ export default {
           }
         });
     }
+  },
+  components: {
+    swiper
   }
 };
 </script>
 
 <style scoped>
-.mint-swipe {
-  height: 180px;
-}
-
-.mint-swipe-item:nth-child(1) {
-  background-color: red;
-}
-
-.mint-swipe-item:nth-child(2) {
-  background-color: blue;
-}
-
-.mint-swipe-item:nth-child(3) {
-  background-color: saddlebrown;
-}
-
-img {
-  height: 100%;
-  width: 100%;
-}
-
 /* 没有引入saas插件，该字体样式被禁用了 */
 .mui-media-body { 
     font-size: 10px;

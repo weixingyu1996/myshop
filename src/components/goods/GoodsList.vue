@@ -1,70 +1,72 @@
 <template>
     <div class="goods-list">
-        <div class="goods-item">
-            <img src="http://fuss10.elemecdn.com/b/18/0678e57cb1b226c04888e7f244c20jpeg.jpeg">
-            <h1 class="title">小米</h1>
+        <!-- <router-link class="goods-item" v-for="item in goodslist" :key="item.id" :to="'/home/goodsinfo/' + item.id" tag="div">
+            <img :src="item.img_url">
+            <h1 class="title">{{ item.title }}</h1>
             <div class="info">
                 <p class="price">
-                    <span class="now">￥2399</span>
-                    <span class="old">￥2199</span>
+                    <span class="now">￥{{ item.sell_price }}</span>
+                    <span class="old">￥{{ item.market_price }}</span>
                 </p>
                 <p class="sell">
                     <span>热卖中</span>
-                    <span>剩余60件</span>
+                    <span>剩余{{ item.stock_quantity }}件</span>
+                </p>
+            </div>
+        </router-link> -->
+
+        <div class="goods-item" v-for="item in goodslist" :key="item.id" @click="getDetile(item.id)">
+            <img :src="item.img_url">
+            <h1 class="title">{{ item.title }}</h1>
+            <div class="info">
+                <p class="price">
+                    <span class="now">￥{{ item.sell_price }}</span>
+                    <span class="old">￥{{ item.market_price }}</span>
+                </p>
+                <p class="sell">
+                    <span>热卖中</span>
+                    <span>剩余{{ item.stock_quantity }}件</span>
                 </p>
             </div>
         </div>
 
-        <div class="goods-item">
-            <img src="http://fuss10.elemecdn.com/b/18/0678e57cb1b226c04888e7f244c20jpeg.jpeg">
-            <h1 class="title">小米</h1>
-            <div class="info">
-                <p class="price">
-                    <span class="now">￥2399</span>
-                    <span class="old">￥2199</span>
-                </p>
-                <p class="sell">
-                    <span>热卖中</span>
-                    <span>剩余60件</span>
-                </p>
-            </div>
-        </div>
-
-        <div class="goods-item">
-            <img src="http://fuss10.elemecdn.com/b/18/0678e57cb1b226c04888e7f244c20jpeg.jpeg">
-            <h1 class="title">小米</h1>
-            <div class="info">
-                <p class="price">
-                    <span class="now">￥2399</span>
-                    <span class="old">￥2199</span>
-                </p>
-                <p class="sell">
-                    <span>热卖中</span>
-                    <span>剩余60件</span>
-                </p>
-            </div>
-        </div>
-
-        <div class="goods-item">
-            <img src="http://fuss10.elemecdn.com/b/18/0678e57cb1b226c04888e7f244c20jpeg.jpeg">
-            <h1 class="title">小米</h1>
-            <div class="info">
-                <p class="price">
-                    <span class="now">￥2399</span>
-                    <span class="old">￥2199</span>
-                </p>
-                <p class="sell">
-                    <span>热卖中</span>
-                    <span>剩余60件</span>
-                </p>
-            </div>
-        </div>
+        <mt-button type="danger" size="large" @click="getMore()">加载更多</mt-button>
     </div>
 </template>
 
 <script>
+import { Toast } from "mint-ui"
 export default {
-    
+    data() {
+        return {
+            pageIndex: 1,
+            goodslist: []
+        }
+    },
+    created() {
+        this.getGoodList();
+    },
+    methods: {
+        getGoodList() {
+            this.$http.get('api/getgoods?pageindex=' + this.pageIndex).then(result => {
+                if(result.body.status === 0) {
+                    this.goodslist = this.goodslist.concat(result.body.message);
+                } else {
+                    Toast("获取商品列表失败")
+                }
+            })
+        },
+        getMore() {
+            this.pageIndex++;
+            this.getGoodList();
+        },
+        getDetile(id) {
+            // this.$router.push('/home/goodsinfo/' + id);
+            // this.$router.push({path: "/home/goodsinfo/" + id});
+            console.log(id);
+            this.$router.push({name: 'goodsinfo', params: {id}})
+        }
+    }
 }
 </script>
 
