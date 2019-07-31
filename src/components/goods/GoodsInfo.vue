@@ -103,6 +103,16 @@ export default {
     },
     addToShopCar() {
       this.ballFlag = !this.ballFlag;
+
+      var goodsinfo = {
+        id: this.id,
+        count: this.selectCount,
+        price: this.goodsinfo.sell_price,
+        selected: true
+      }
+      console.log(goodsinfo)
+
+      this.$store.commit('addToCar', goodsinfo)
     },
     beforeEnter(el) {
       el.style.transform = "translate(0, 0)";
@@ -124,7 +134,7 @@ export default {
       this.ballFlag = !this.ballFlag;
     },
     getSelectCount(count) {
-        this.getSelectCount = count;
+      this.selectCount = count;
     }
   },
   components: {
